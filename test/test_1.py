@@ -18,4 +18,30 @@ def test_text_message():
     print('Response: {0}'.format(response))
 
 
-test_text_message()
+def test_typing(on=True):
+    print('Testing text message')
+    bot = get_test_bot()
+    recipient = get_test_recipient()
+
+    #epic action enums
+    if on:
+        action = Message.ACTION.TYPING_ON
+    else:
+        action = Message.ACTION.TYPING_OFF
+
+    message = Message(action=action)
+    response, success = bot.send_message(message, recipient)
+
+    print('Success? {0}'.format(success))
+    print('Response: {0}'.format(response))
+
+
+def test_natural_message():
+    import time
+
+    test_typing()
+    time.sleep(2)
+    test_text_message()
+
+
+test_natural_message()
