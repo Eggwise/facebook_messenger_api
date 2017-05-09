@@ -57,7 +57,7 @@ def _get_credentials():
 
 def get_test_recipient():
     credentials = _get_credentials()
-    recipient_id = MessengerBot(credentials['recipient_id'])
+    recipient_id = credentials['recipient_id']
     return recipient_id
 
 

@@ -1,11 +1,15 @@
 from facebook_messenger_api import MessengerBot
 from facebook_messenger_api import Message
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
-from .utils import get_test_bot, get_test_recipient
+from facebook_messenger_api.test.utils import get_test_bot, get_test_recipient
 
 bot = get_test_bot()
 recipient = get_test_recipient()
 
-response, success = bot.send_message('This is a test', recipient)
+message = Message(text='This is a test')
+
+response, success = bot.send_message(message, recipient)
 
 print(response, success)
