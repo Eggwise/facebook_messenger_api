@@ -1,4 +1,5 @@
 import requests, json
+import logging
 
 
 class Bot():
@@ -15,16 +16,22 @@ class Bot():
         }
         data = json.dumps(message)
 
-        print('send message', data)
+        logging.info('Sending message: {0}'.format(data))
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
         if r.status_code != 200:
-            print('ERROR')
-            print(r.status_code)
-            print(r.text)
+            success = False
+            logging.error('Send message response returned non 200 status code')
+            logging.error('Response: {0}'.format(r.text))
+
+        else:
+            success = True
+        response = r.text
+        return response, success
 
     def send_message(self, message, recipient=None):
         if recipient is not None:
             message.recipient = recipient
 
         message = message.build()
-        self._send_message(self.access_token, message)
+        response = self._send_message(self.access_token, message)
+        return response
