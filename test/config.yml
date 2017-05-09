@@ -1,2 +1,2 @@
-access_token: SHOULD NOT BE VISIBLE ON GIT
+access_token: PAGE_ACCESS_TOKEN
 recipient_id: RECIPIENT_ID

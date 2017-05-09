@@ -90,5 +90,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
-/test/config.yml
-/test/config.json
+test/config.yml
+test/config.json
