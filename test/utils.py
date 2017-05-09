@@ -1,5 +1,6 @@
 import os
 from facebook_messenger_api import MessengerBot
+import logging
 
 def _validate_credentials(config):
     if config is None:
@@ -15,7 +16,8 @@ def _validate_credentials(config):
 
 def _load_credentials(file_name, loader):
     path = os.path.join(os.path.dirname(__file__), file_name)
-    print('Reading credentials from path: {0}'.format(path))
+    log_msg = 'Reading credentials from path: {0}'.format(path)
+    logging.info(log_msg)
 
     with open(path) as f:
         credentials = loader.load(f.read())
@@ -57,7 +59,7 @@ def _get_credentials():
 
 def get_test_recipient():
     credentials = _get_credentials()
-    recipient_id = credentials['recipient_id']
+    recipient_id = str(credentials['recipient_id'])
     return recipient_id
 
 
