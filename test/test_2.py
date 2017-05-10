@@ -15,9 +15,8 @@ def test_quick_reply():
     quickreply_text = QuickReply(title='Text quickreply', content_type=QuickReply.CONTENT_TYPE.TEXT, payload='MUST HAVE PAYLOAD')
     quickreply_image = QuickReply(image_url='https://placehold.it/100x100', title='With image', content_type=QuickReply.CONTENT_TYPE.TEXT, payload='MUST HAVE PAYLOAD')
 
-
     quickreplies = [quickreply_location, quickreply_text, quickreply_image]
-    # quickreplies = [quickreply_text]
+
     quickreply_message = QuickReplyMessage(text='Quicklrepies test', quick_replies=quickreplies)
     response, success = bot.send_message(quickreply_message)
 
