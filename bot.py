@@ -1,6 +1,6 @@
 import requests, json
 import logging
-from .models.models import *
+from .models.models_backup import *
 
 
 class Bot():
