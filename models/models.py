@@ -24,7 +24,7 @@ class Utils():
 
 
 class ActionMessage(ActionMessageBase):
-    def __init__(self,  action = None,  recipient = None, ):
+    def __init__(self,  recipient = None,  action = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -36,7 +36,7 @@ class ActionMessage(ActionMessageBase):
 
 
 class CallButton(CallButtonBase):
-    def __init__(self,  title = None,  type = None,  payload = None, ):
+    def __init__(self,  payload = None,  type = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -48,7 +48,7 @@ class CallButton(CallButtonBase):
 
 
 class GenericElement(GenericElementBase):
-    def __init__(self,  image_url = None,  default_action = None,  subtitle = None,  item_url = None,  title = None,  buttons = None, ):
+    def __init__(self,  image_url = None,  item_url = None,  title = None,  subtitle = None,  default_action = None,  buttons = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -60,7 +60,7 @@ class GenericElement(GenericElementBase):
 
 
 class GenericTemplate(GenericTemplateBase):
-    def __init__(self,  type = None,  payload = None, ):
+    def __init__(self,  payload = None,  type = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -84,7 +84,7 @@ class GenericTemplateMessage(GenericTemplateMessageBase):
 
 
 class ListElement(ListElementBase):
-    def __init__(self,  image_url = None,  default_action = None,  subtitle = None,  buttons = None,  title = None, ):
+    def __init__(self,  image_url = None,  title = None,  subtitle = None,  default_action = None,  buttons = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -96,7 +96,7 @@ class ListElement(ListElementBase):
 
 
 class ListTemplate(ListTemplateBase):
-    def __init__(self,  type = None,  payload = None, ):
+    def __init__(self,  payload = None,  type = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -120,34 +120,24 @@ class ListTemplateMessage(ListTemplateMessageBase):
 
 
 class Message(MessageBase):
-    def __init__(self,  text = None,  action = None,  recipient = None, ):
+    def __init__(self,  recipient = None,  action = None,  text = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
         self.validate()
 
-
     def validate(self):
-
-        if self.action is None and self.text is None:
+        if self.text is None and self.action is None:
             msg = 'Non action message needs text'
             raise ValidationError(msg)
 
-        if self.action is not None and self.text is not None:
-            # todo is this true?
-            msg = 'Text message cant have an action'
-            raise ValidationError(msg)
-
-
 
 class PostBackButton(PostBackButtonBase):
-    def __init__(self,  title = None,  type = None,  payload = None, ):
+    def __init__(self,  payload = None,  type = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
         self.validate()
-
-
 
     def validate(self):
         if self.title is None:
@@ -157,15 +147,22 @@ class PostBackButton(PostBackButtonBase):
         pass
 
 
-
 class QuickReply(QuickReplyBase):
-    def __init__(self,  content_type = None,  image_url = None,  title = None,  payload = None, ):
+    def __init__(self,  image_url = None,  content_type = None,  title = None,  payload = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
+
+        # default value
+        if self.content_type is None:
+            self.content_type = self.CONTENT_TYPE.TEXT
+
         self.validate()
 
     def validate(self):
+
+        if self.content_type is None:
+            raise ValidationError('Quickreply must have a content type')
 
         if self.title is None:
             raise ValidationError('No title for quick reply')
@@ -176,7 +173,7 @@ class QuickReply(QuickReplyBase):
 
 
 class QuickReplyMessage(QuickReplyMessageBase):
-    def __init__(self,  text = None,  quick_replies = None,  recipient = None, ):
+    def __init__(self,  quick_replies = None,  recipient = None,  text = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -200,7 +197,7 @@ class ShareButton(ShareButtonBase):
 
 
 class UrlButton(UrlButtonBase):
-    def __init__(self,  url = None,  type = None,  fallback_url = None,  messenger_extensions = None,  title = None,  webview_height_ratio = None, ):
+    def __init__(self,  webview_height_ratio = None,  url = None,  fallback_url = None,  title = None,  type = None,  messenger_extensions = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)

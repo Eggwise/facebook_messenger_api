@@ -29,6 +29,7 @@ def test_typing(on=True):
     else:
         action = Message.ACTION.TYPING_OFF
 
+    print(action)
     message = Message(action=action)
     response, success = bot.send_message(message, recipient)
 
