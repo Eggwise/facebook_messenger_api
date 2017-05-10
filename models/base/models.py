@@ -4,7 +4,20 @@
 import copy
 
 
+
 class FactoryBase():
+
+    @staticmethod
+    def __get_super_args(locals):
+        super_args = {}
+
+        for k, v in locals.items():
+            if k.startswith('__'):
+                continue
+            if k == 'self':
+                continue
+            super_args[k] = v
+        return super_args
 
     def __init__(self, schema, config, child_locals = None):
 
@@ -108,6 +121,8 @@ class FactoryBase():
         return scoped_object
 
     def __getattr__(self, item):
+        if item == '__get_super_args':
+            return self.__get_super_args
         mapping = self.mapping
         if item not in mapping :
             err_msg = '{0} > No mapping to schema defined for: {1}\nAvailable bindings:\n {2}'.format(self, item,
@@ -173,7 +188,7 @@ class FactoryBase():
 
 class ActionMessageBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'generic_template': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'generic'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'quickreply': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'type': 'list', 'enum': None, 'value': []}, 'text': {'name': 'text', 'type': 'string', 'enum': None, 'value': None}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'list_template': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'list'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': None}, 'text': {'name': 'text', 'type': 'string', 'enum': None, 'value': None}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}
+    SCHEMA =  {'quickreply': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'text': {'name': 'text', 'enum': None, 'type': 'string', 'value': None}, 'quick_replies': {'name': 'quick_replies', 'enum': None, 'type': 'list', 'value': []}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'list_template': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'list'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'generic_template': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'generic'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'type': 'object', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'text': {'name': 'text', 'enum': None, 'type': 'string', 'value': None}, 'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': None}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}}
     CONFIG = {'mapping': {'action': 'sender_action', 'recipient': 'recipient.id'}, 'schema': 'message', 'class_name': 'ActionMessage'}
 
     def __init__(self,  action = None,  recipient = None, ):
@@ -206,23 +221,15 @@ class ActionMessageBase (FactoryBase):
         MARK_SEEN = 'mark_seen'
 class GenericElementBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'default_action': {'name': 'default_action', 'type': 'string', 'enum': None, 'value': None}, 'image_url': {'name': 'image_url', 'type': 'string', 'enum': None, 'value': None}, 'subtitle': {'name': 'subtitle', 'type': 'string', 'enum': None, 'value': None}, 'buttons': {'name': 'buttons', 'type': 'list', 'enum': None, 'value': []}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'item_url': {'name': 'item_url', 'type': 'string', 'enum': None, 'value': None}}}
-    CONFIG = {'mapping': {'default_action': 'default_action', 'image_url': 'image_url', 'buttons': 'buttons', 'subtitle': 'subtitle', 'title': 'title', 'item_url': 'item_url'}, 'schema': 'generic.element', 'class_name': 'GenericElement'}
+    SCHEMA =  {'value': {'image_url': {'name': 'image_url', 'enum': None, 'type': 'string', 'value': None}, 'default_action': {'name': 'default_action', 'enum': None, 'type': 'string', 'value': None}, 'subtitle': {'name': 'subtitle', 'enum': None, 'type': 'string', 'value': None}, 'item_url': {'name': 'item_url', 'enum': None, 'type': 'string', 'value': None}, 'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}, 'buttons': {'name': 'buttons', 'enum': None, 'type': 'list', 'value': []}}, 'type': 'object'}
+    CONFIG = {'mapping': {'image_url': 'image_url', 'default_action': 'default_action', 'subtitle': 'subtitle', 'item_url': 'item_url', 'title': 'title', 'buttons': 'buttons'}, 'schema': 'generic.element', 'class_name': 'GenericElement'}
 
-    def __init__(self,  default_action = None,  image_url = None,  buttons = None,  subtitle = None,  title = None,  item_url = None, ):
+    def __init__(self,  image_url = None,  default_action = None,  subtitle = None,  item_url = None,  title = None,  buttons = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def default_action(self):
-        return self.__getattr__('action')
-
-    @default_action.setter
-    def default_action(self, value):
-        self.__setattr__('default_action', value)
     
     @property
     def image_url(self):
@@ -233,12 +240,12 @@ class GenericElementBase (FactoryBase):
         self.__setattr__('image_url', value)
     
     @property
-    def buttons(self):
+    def default_action(self):
         return self.__getattr__('action')
 
-    @buttons.setter
-    def buttons(self, value):
-        self.__setattr__('buttons', value)
+    @default_action.setter
+    def default_action(self, value):
+        self.__setattr__('default_action', value)
     
     @property
     def subtitle(self):
@@ -247,14 +254,6 @@ class GenericElementBase (FactoryBase):
     @subtitle.setter
     def subtitle(self, value):
         self.__setattr__('subtitle', value)
-    
-    @property
-    def title(self):
-        return self.__getattr__('action')
-
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
     
     @property
     def item_url(self):
@@ -264,76 +263,13 @@ class GenericElementBase (FactoryBase):
     def item_url(self, value):
         self.__setattr__('item_url', value)
     
-
-class GenericTemplateBase (FactoryBase):
-
-    SCHEMA =  {'type': 'object', 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'generic'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'type': 'type'}, 'schema': 'generic.template', 'class_name': 'GenericTemplate'}
-
-    def __init__(self,  payload = None,  type = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
-    
     @property
-    def payload(self):
+    def title(self):
         return self.__getattr__('action')
 
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
-    
-    @property
-    def type(self):
-        return self.__getattr__('action')
-
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
-    
-
-class GenericTemplateMessageBase (FactoryBase):
-
-    SCHEMA =  {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'generic'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}
-    CONFIG = {'mapping': {'recipient': 'recipient.id', 'elements': 'message.attachment.payload.elements'}, 'schema': 'generic_template.message', 'class_name': 'GenericTemplateMessage'}
-
-    def __init__(self,  recipient = None,  elements = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
-    
-    @property
-    def recipient(self):
-        return self.__getattr__('action')
-
-    @recipient.setter
-    def recipient(self, value):
-        self.__setattr__('recipient', value)
-    
-    @property
-    def elements(self):
-        return self.__getattr__('action')
-
-    @elements.setter
-    def elements(self, value):
-        self.__setattr__('elements', value)
-    
-
-class ListElementBase (FactoryBase):
-
-    SCHEMA =  {'type': 'object', 'value': {'buttons': {'name': 'buttons', 'type': 'list', 'enum': None, 'value': []}, 'default_action': {'name': 'default_action', 'type': 'string', 'enum': None, 'value': None}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'image_url': {'name': 'image_url', 'type': 'string', 'enum': None, 'value': None}, 'subtitle': {'name': 'subtitle', 'type': 'string', 'enum': None, 'value': None}}}
-    CONFIG = {'mapping': {'buttons': 'buttons', 'default_action': 'default_action', 'title': 'title', 'image_url': 'image_url', 'subtitle': 'subtitle'}, 'schema': 'list.element', 'class_name': 'ListElement'}
-
-    def __init__(self,  buttons = None,  default_action = None,  title = None,  image_url = None,  subtitle = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
     
     @property
     def buttons(self):
@@ -343,21 +279,76 @@ class ListElementBase (FactoryBase):
     def buttons(self, value):
         self.__setattr__('buttons', value)
     
-    @property
-    def default_action(self):
-        return self.__getattr__('action')
 
-    @default_action.setter
-    def default_action(self, value):
-        self.__setattr__('default_action', value)
+class GenericTemplateBase (FactoryBase):
+
+    SCHEMA =  {'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'generic'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}, 'type': 'object'}
+    CONFIG = {'mapping': {'type': 'type', 'payload': 'payload'}, 'schema': 'generic.template', 'class_name': 'GenericTemplate'}
+
+    def __init__(self,  type = None,  payload = None, ):
+
+        _schema = copy.deepcopy(self.SCHEMA)
+        _config = copy.deepcopy(self.CONFIG)
+        super().__init__(_schema, _config, locals())
+
     
     @property
-    def title(self):
+    def type(self):
         return self.__getattr__('action')
 
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
+    @type.setter
+    def type(self, value):
+        self.__setattr__('type', value)
+    
+    @property
+    def payload(self):
+        return self.__getattr__('action')
+
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
+    
+
+class GenericTemplateMessageBase (FactoryBase):
+
+    SCHEMA =  {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'generic'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}
+    CONFIG = {'mapping': {'elements': 'message.attachment.payload.elements', 'recipient': 'recipient.id'}, 'schema': 'generic_template.message', 'class_name': 'GenericTemplateMessage'}
+
+    def __init__(self,  elements = None,  recipient = None, ):
+
+        _schema = copy.deepcopy(self.SCHEMA)
+        _config = copy.deepcopy(self.CONFIG)
+        super().__init__(_schema, _config, locals())
+
+    
+    @property
+    def elements(self):
+        return self.__getattr__('action')
+
+    @elements.setter
+    def elements(self, value):
+        self.__setattr__('elements', value)
+    
+    @property
+    def recipient(self):
+        return self.__getattr__('action')
+
+    @recipient.setter
+    def recipient(self, value):
+        self.__setattr__('recipient', value)
+    
+
+class ListElementBase (FactoryBase):
+
+    SCHEMA =  {'value': {'image_url': {'name': 'image_url', 'enum': None, 'type': 'string', 'value': None}, 'default_action': {'name': 'default_action', 'enum': None, 'type': 'string', 'value': None}, 'buttons': {'name': 'buttons', 'enum': None, 'type': 'list', 'value': []}, 'subtitle': {'name': 'subtitle', 'enum': None, 'type': 'string', 'value': None}, 'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}}, 'type': 'object'}
+    CONFIG = {'mapping': {'image_url': 'image_url', 'default_action': 'default_action', 'subtitle': 'subtitle', 'buttons': 'buttons', 'title': 'title'}, 'schema': 'list.element', 'class_name': 'ListElement'}
+
+    def __init__(self,  image_url = None,  default_action = None,  subtitle = None,  buttons = None,  title = None, ):
+
+        _schema = copy.deepcopy(self.SCHEMA)
+        _config = copy.deepcopy(self.CONFIG)
+        super().__init__(_schema, _config, locals())
+
     
     @property
     def image_url(self):
@@ -368,6 +359,14 @@ class ListElementBase (FactoryBase):
         self.__setattr__('image_url', value)
     
     @property
+    def default_action(self):
+        return self.__getattr__('action')
+
+    @default_action.setter
+    def default_action(self, value):
+        self.__setattr__('default_action', value)
+    
+    @property
     def subtitle(self):
         return self.__getattr__('action')
 
@@ -375,26 +374,34 @@ class ListElementBase (FactoryBase):
     def subtitle(self, value):
         self.__setattr__('subtitle', value)
     
+    @property
+    def buttons(self):
+        return self.__getattr__('action')
+
+    @buttons.setter
+    def buttons(self, value):
+        self.__setattr__('buttons', value)
+    
+    @property
+    def title(self):
+        return self.__getattr__('action')
+
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
+    
 
 class ListTemplateBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'list'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'type': 'type'}, 'schema': 'list.template', 'class_name': 'ListTemplate'}
+    SCHEMA =  {'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'list'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}, 'type': 'object'}
+    CONFIG = {'mapping': {'type': 'type', 'payload': 'payload'}, 'schema': 'list.template', 'class_name': 'ListTemplate'}
 
-    def __init__(self,  payload = None,  type = None, ):
+    def __init__(self,  type = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def payload(self):
-        return self.__getattr__('action')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
     
     @property
     def type(self):
@@ -404,26 +411,26 @@ class ListTemplateBase (FactoryBase):
     def type(self, value):
         self.__setattr__('type', value)
     
+    @property
+    def payload(self):
+        return self.__getattr__('action')
+
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
+    
 
 class ListTemplateMessageBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'list'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}
-    CONFIG = {'mapping': {'recipient': 'recipient.id', 'elements': 'message.attachment.payload.elements'}, 'schema': 'list_template.message', 'class_name': 'ListTemplateMessage'}
+    SCHEMA =  {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'list'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}
+    CONFIG = {'mapping': {'elements': 'message.attachment.payload.elements', 'recipient': 'recipient.id'}, 'schema': 'list_template.message', 'class_name': 'ListTemplateMessage'}
 
-    def __init__(self,  recipient = None,  elements = None, ):
+    def __init__(self,  elements = None,  recipient = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def recipient(self):
-        return self.__getattr__('action')
-
-    @recipient.setter
-    def recipient(self, value):
-        self.__setattr__('recipient', value)
     
     @property
     def elements(self):
@@ -433,18 +440,34 @@ class ListTemplateMessageBase (FactoryBase):
     def elements(self, value):
         self.__setattr__('elements', value)
     
+    @property
+    def recipient(self):
+        return self.__getattr__('action')
+
+    @recipient.setter
+    def recipient(self, value):
+        self.__setattr__('recipient', value)
+    
 
 class MessageBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'generic_template': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'generic'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'quickreply': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'type': 'list', 'enum': None, 'value': []}, 'text': {'name': 'text', 'type': 'string', 'enum': None, 'value': None}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'list_template': {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': {'payload': {'name': 'payload', 'type': 'object', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'type': 'string', 'enum': None, 'value': 'list'}, 'elements': {'name': 'elements', 'type': 'list', 'enum': None, 'value': []}}}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'template'}}}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}, 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'type': 'object', 'enum': None, 'value': None}, 'text': {'name': 'text', 'type': 'string', 'enum': None, 'value': None}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}
-    CONFIG = {'mapping': {'action': 'sender_action', 'recipient': 'recipient.id', 'text': 'message.text'}, 'schema': 'message', 'class_name': 'Message'}
+    SCHEMA =  {'quickreply': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'text': {'name': 'text', 'enum': None, 'type': 'string', 'value': None}, 'quick_replies': {'name': 'quick_replies', 'enum': None, 'type': 'list', 'value': []}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'list_template': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'list'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'generic_template': {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'template'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'object', 'value': {'template_type': {'name': 'template_type', 'enum': None, 'type': 'string', 'value': 'generic'}, 'elements': {'name': 'elements', 'enum': None, 'type': 'list', 'value': []}}}}}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}, 'type': 'object', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'text': {'name': 'text', 'enum': None, 'type': 'string', 'value': None}, 'attachment': {'name': 'attachment', 'enum': None, 'type': 'object', 'value': None}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}}
+    CONFIG = {'mapping': {'text': 'message.text', 'action': 'sender_action', 'recipient': 'recipient.id'}, 'schema': 'message', 'class_name': 'Message'}
 
-    def __init__(self,  action = None,  recipient = None,  text = None, ):
+    def __init__(self,  text = None,  action = None,  recipient = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
+    
+    @property
+    def text(self):
+        return self.__getattr__('action')
+
+    @text.setter
+    def text(self, value):
+        self.__setattr__('text', value)
     
     @property
     def action(self):
@@ -462,14 +485,6 @@ class MessageBase (FactoryBase):
     def recipient(self, value):
         self.__setattr__('recipient', value)
     
-    @property
-    def text(self):
-        return self.__getattr__('action')
-
-    @text.setter
-    def text(self, value):
-        self.__setattr__('text', value)
-    
 
     class ACTION:
         TYPING_ON = 'typing_on'
@@ -477,31 +492,15 @@ class MessageBase (FactoryBase):
         MARK_SEEN = 'mark_seen'
 class QuickReplyBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'location': {'type': 'object', 'value': {'content_type': {'name': 'content_type', 'type': 'string', 'enum': None, 'value': 'location'}}}, 'value': {'payload': {'name': 'payload', 'type': 'string', 'enum': None, 'value': None}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'content_type': {'name': 'content_type', 'type': 'enum', 'enum': ['text', 'location'], 'value': None}, 'image_url': {'name': 'image_url', 'type': 'string', 'enum': None, 'value': None}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'title': 'title', 'content_type': 'content_type', 'image_url': 'image_url'}, 'schema': 'quickreply', 'class_name': 'QuickReply'}
+    SCHEMA =  {'location': {'value': {'content_type': {'name': 'content_type', 'enum': None, 'type': 'string', 'value': 'location'}}, 'type': 'object'}, 'value': {'content_type': {'name': 'content_type', 'enum': ['text', 'location'], 'type': 'enum', 'value': None}, 'image_url': {'name': 'image_url', 'enum': None, 'type': 'string', 'value': None}, 'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}, 'payload': {'name': 'payload', 'enum': None, 'type': 'string', 'value': None}}, 'type': 'object'}
+    CONFIG = {'mapping': {'content_type': 'content_type', 'image_url': 'image_url', 'title': 'title', 'payload': 'payload'}, 'schema': 'quickreply', 'class_name': 'QuickReply'}
 
-    def __init__(self,  payload = None,  title = None,  content_type = None,  image_url = None, ):
+    def __init__(self,  content_type = None,  image_url = None,  title = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def payload(self):
-        return self.__getattr__('action')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
-    
-    @property
-    def title(self):
-        return self.__getattr__('action')
-
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
     
     @property
     def content_type(self):
@@ -519,21 +518,45 @@ class QuickReplyBase (FactoryBase):
     def image_url(self, value):
         self.__setattr__('image_url', value)
     
+    @property
+    def title(self):
+        return self.__getattr__('action')
+
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
+    
+    @property
+    def payload(self):
+        return self.__getattr__('action')
+
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
+    
 
     class CONTENT_TYPE:
         TEXT = 'text'
         LOCATION = 'location'
 class QuickReplyMessageBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'notification_type': {'name': 'notification_type', 'type': 'enum', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None}, 'sender_action': {'name': 'sender_action', 'type': 'enum', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None}, 'message': {'name': 'message', 'type': 'object', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'type': 'list', 'enum': None, 'value': []}, 'text': {'name': 'text', 'type': 'string', 'enum': None, 'value': None}}}, 'recipient': {'name': 'recipient', 'type': 'object', 'enum': None, 'value': {'id': {'name': 'id', 'type': 'string', 'enum': None, 'value': None}, 'phone_number': {'name': 'phone_number', 'type': 'string', 'enum': None, 'value': None}}}}}
-    CONFIG = {'mapping': {'quick_replies': 'message.quick_replies', 'recipient': 'recipient.id', 'text': 'message.text'}, 'schema': 'quickreply.message', 'class_name': 'QuickReplyMessage'}
+    SCHEMA =  {'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum', 'value': None}, 'message': {'name': 'message', 'enum': None, 'type': 'object', 'value': {'text': {'name': 'text', 'enum': None, 'type': 'string', 'value': None}, 'quick_replies': {'name': 'quick_replies', 'enum': None, 'type': 'list', 'value': []}}}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum', 'value': None}, 'recipient': {'name': 'recipient', 'enum': None, 'type': 'object', 'value': {'phone_number': {'name': 'phone_number', 'enum': None, 'type': 'string', 'value': None}, 'id': {'name': 'id', 'enum': None, 'type': 'string', 'value': None}}}}, 'type': 'object'}
+    CONFIG = {'mapping': {'text': 'message.text', 'quick_replies': 'message.quick_replies', 'recipient': 'recipient.id'}, 'schema': 'quickreply.message', 'class_name': 'QuickReplyMessage'}
 
-    def __init__(self,  quick_replies = None,  recipient = None,  text = None, ):
+    def __init__(self,  text = None,  quick_replies = None,  recipient = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
+    
+    @property
+    def text(self):
+        return self.__getattr__('action')
+
+    @text.setter
+    def text(self, value):
+        self.__setattr__('text', value)
     
     @property
     def quick_replies(self):
@@ -551,34 +574,18 @@ class QuickReplyMessageBase (FactoryBase):
     def recipient(self, value):
         self.__setattr__('recipient', value)
     
-    @property
-    def text(self):
-        return self.__getattr__('action')
-
-    @text.setter
-    def text(self, value):
-        self.__setattr__('text', value)
-    
 
 class CallButtonBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'payload': {'name': 'payload', 'type': 'string', 'enum': None, 'value': None}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'phone_number'}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'title': 'title', 'type': 'type'}, 'schema': 'call.button', 'class_name': 'CallButton'}
+    SCHEMA =  {'value': {'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}, 'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'phone_number'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'string', 'value': None}}, 'type': 'object'}
+    CONFIG = {'mapping': {'title': 'title', 'type': 'type', 'payload': 'payload'}, 'schema': 'call.button', 'class_name': 'CallButton'}
 
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  title = None,  type = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def payload(self):
-        return self.__getattr__('action')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
     
     @property
     def title(self):
@@ -595,27 +602,27 @@ class CallButtonBase (FactoryBase):
     @type.setter
     def type(self, value):
         self.__setattr__('type', value)
+    
+    @property
+    def payload(self):
+        return self.__getattr__('action')
+
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
     
 
 class PostBackButtonBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'payload': {'name': 'payload', 'type': 'string', 'enum': None, 'value': None}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'postback'}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'title': 'title', 'type': 'type'}, 'schema': 'postback.button', 'class_name': 'PostBackButton'}
+    SCHEMA =  {'value': {'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}, 'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'postback'}, 'payload': {'name': 'payload', 'enum': None, 'type': 'string', 'value': None}}, 'type': 'object'}
+    CONFIG = {'mapping': {'title': 'title', 'type': 'type', 'payload': 'payload'}, 'schema': 'postback.button', 'class_name': 'PostBackButton'}
 
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  title = None,  type = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def payload(self):
-        return self.__getattr__('action')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
     
     @property
     def title(self):
@@ -633,19 +640,6 @@ class PostBackButtonBase (FactoryBase):
     def type(self, value):
         self.__setattr__('type', value)
     
-
-class ShareButtonBase (FactoryBase):
-
-    SCHEMA =  {'type': 'object', 'value': {'payload': {'name': 'payload', 'type': 'string', 'enum': None, 'value': None}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'element_share'}}}
-    CONFIG = {'mapping': {'payload': 'payload', 'title': 'title', 'type': 'type'}, 'schema': 'share.button', 'class_name': 'ShareButton'}
-
-    def __init__(self,  payload = None,  title = None,  type = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
-    
     @property
     def payload(self):
         return self.__getattr__('action')
@@ -654,13 +648,18 @@ class ShareButtonBase (FactoryBase):
     def payload(self, value):
         self.__setattr__('payload', value)
     
-    @property
-    def title(self):
-        return self.__getattr__('action')
 
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
+class ShareButtonBase (FactoryBase):
+
+    SCHEMA =  {'value': {'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'element_share'}}, 'type': 'object'}
+    CONFIG = {'mapping': {'type': 'type'}, 'schema': 'share.button', 'class_name': 'ShareButton'}
+
+    def __init__(self,  type = None, ):
+
+        _schema = copy.deepcopy(self.SCHEMA)
+        _config = copy.deepcopy(self.CONFIG)
+        super().__init__(_schema, _config, locals())
+
     
     @property
     def type(self):
@@ -673,47 +672,15 @@ class ShareButtonBase (FactoryBase):
 
 class UrlButtonBase (FactoryBase):
 
-    SCHEMA =  {'type': 'object', 'value': {'webview_height_ratio': {'name': 'webview_height_ratio', 'type': 'enum', 'enum': ['compact', 'tall', 'full'], 'value': None}, 'messenger_extensions': {'name': 'messenger_extensions', 'type': 'boolean', 'enum': None, 'value': None}, 'type': {'name': 'type', 'type': 'string', 'enum': None, 'value': 'web_url'}, 'title': {'name': 'title', 'type': 'string', 'enum': None, 'value': None}, 'url': {'name': 'url', 'type': 'string', 'enum': None, 'value': None}, 'fallback_url': {'name': 'fallback_url', 'type': 'string', 'enum': None, 'value': None}}}
-    CONFIG = {'mapping': {'webview_height_ratio': 'webview_height_ratio', 'messenger_extensions': 'messenger_extensions', 'type': 'type', 'title': 'title', 'url': 'url', 'fallback_url': 'fallback_url'}, 'schema': 'url.button', 'class_name': 'UrlButton'}
+    SCHEMA =  {'value': {'url': {'name': 'url', 'enum': None, 'type': 'string', 'value': None}, 'type': {'name': 'type', 'enum': None, 'type': 'string', 'value': 'web_url'}, 'fallback_url': {'name': 'fallback_url', 'enum': None, 'type': 'string', 'value': None}, 'messenger_extensions': {'name': 'messenger_extensions', 'enum': None, 'type': 'boolean', 'value': None}, 'title': {'name': 'title', 'enum': None, 'type': 'string', 'value': None}, 'webview_height_ratio': {'name': 'webview_height_ratio', 'enum': ['compact', 'tall', 'full'], 'type': 'enum', 'value': None}}, 'type': 'object'}
+    CONFIG = {'mapping': {'url': 'url', 'type': 'type', 'fallback_url': 'fallback_url', 'messenger_extensions': 'messenger_extensions', 'title': 'title', 'webview_height_ratio': 'webview_height_ratio'}, 'schema': 'url.button', 'class_name': 'UrlButton'}
 
-    def __init__(self,  webview_height_ratio = None,  messenger_extensions = None,  type = None,  title = None,  url = None,  fallback_url = None, ):
+    def __init__(self,  url = None,  type = None,  fallback_url = None,  messenger_extensions = None,  title = None,  webview_height_ratio = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def webview_height_ratio(self):
-        return self.__getattr__('action')
-
-    @webview_height_ratio.setter
-    def webview_height_ratio(self, value):
-        self.__setattr__('webview_height_ratio', value)
-    
-    @property
-    def messenger_extensions(self):
-        return self.__getattr__('action')
-
-    @messenger_extensions.setter
-    def messenger_extensions(self, value):
-        self.__setattr__('messenger_extensions', value)
-    
-    @property
-    def type(self):
-        return self.__getattr__('action')
-
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
-    
-    @property
-    def title(self):
-        return self.__getattr__('action')
-
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
     
     @property
     def url(self):
@@ -724,12 +691,44 @@ class UrlButtonBase (FactoryBase):
         self.__setattr__('url', value)
     
     @property
+    def type(self):
+        return self.__getattr__('action')
+
+    @type.setter
+    def type(self, value):
+        self.__setattr__('type', value)
+    
+    @property
     def fallback_url(self):
         return self.__getattr__('action')
 
     @fallback_url.setter
     def fallback_url(self, value):
         self.__setattr__('fallback_url', value)
+    
+    @property
+    def messenger_extensions(self):
+        return self.__getattr__('action')
+
+    @messenger_extensions.setter
+    def messenger_extensions(self, value):
+        self.__setattr__('messenger_extensions', value)
+    
+    @property
+    def title(self):
+        return self.__getattr__('action')
+
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
+    
+    @property
+    def webview_height_ratio(self):
+        return self.__getattr__('action')
+
+    @webview_height_ratio.setter
+    def webview_height_ratio(self, value):
+        self.__setattr__('webview_height_ratio', value)
     
 
     class WEBVIEW_HEIGHT_RATIO:

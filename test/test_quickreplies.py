@@ -25,6 +25,13 @@ def test_quick_reply():
 
 
 
+def test_invalid_quick_reply():
+    bot = get_test_bot_with_recipient()
 
-test_quick_reply()
+    #no payload
+    quickreply_text = QuickReply(title='Text quickreply')
+
+test_invalid_quick_reply()
+
+# test_quick_reply()
 
