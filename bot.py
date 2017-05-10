@@ -6,7 +6,10 @@ from .models.models import *
 class Bot():
     def __init__(self, access_token, recipient=None):
         self.access_token = access_token
-        self._recipient = recipient
+        self._recipient = str(recipient)
+        logging.info('Initialize MessengerBot.')
+        logging.info('Access token: {0}'.format(access_token))
+        logging.info('Recipient: {0}'.format(recipient))
 
     @property
     def recipient(self):
@@ -28,7 +31,7 @@ class Bot():
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
         if r.status_code != 200:
             success = False
-            logging.error('Send message response returned non 200 status code')
+            logging.error('Send message response returned non 200 status code\nstatus code was: {0}'.format(r.status_code))
             logging.error('Response: {0}'.format(r.text))
 
         else:

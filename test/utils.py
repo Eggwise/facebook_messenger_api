@@ -67,3 +67,10 @@ def get_test_bot():
     credentials = _get_credentials()
     bot = MessengerBot(credentials['access_token'])
     return bot
+
+def get_test_bot_with_recipient():
+    credentials = _get_credentials()
+    page_access_token = credentials['access_token']
+    recipient = credentials['recipient_id']
+    bot = MessengerBot(page_access_token, recipient)
+    return bot
