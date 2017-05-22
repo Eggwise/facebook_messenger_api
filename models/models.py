@@ -36,7 +36,7 @@ class ActionMessage(ActionMessageBase):
 
 
 class CallButton(CallButtonBase):
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -48,7 +48,7 @@ class CallButton(CallButtonBase):
 
 
 class GenericElement(GenericElementBase):
-    def __init__(self,  title = None,  image_url = None,  subtitle = None,  item_url = None,  default_action = None,  buttons = None, ):
+    def __init__(self,  buttons = None,  item_url = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -58,17 +58,6 @@ class GenericElement(GenericElementBase):
         # TODO
         pass
 
-
-class GenericTemplate(GenericTemplateBase):
-    def __init__(self,  payload = None,  type = None, ):
-        super_args = Utils._get_super_args(locals())
-
-        super().__init__(**super_args)
-        self.validate()
-
-    def validate(self):
-        # TODO
-        pass
 
 
 class GenericTemplateMessage(GenericTemplateMessageBase):
@@ -84,19 +73,7 @@ class GenericTemplateMessage(GenericTemplateMessageBase):
 
 
 class ListElement(ListElementBase):
-    def __init__(self,  default_action = None,  title = None,  image_url = None,  subtitle = None,  buttons = None, ):
-        super_args = Utils._get_super_args(locals())
-
-        super().__init__(**super_args)
-        self.validate()
-
-    def validate(self):
-        # TODO
-        pass
-
-
-class ListTemplate(ListTemplateBase):
-    def __init__(self,  payload = None,  type = None, ):
+    def __init__(self,  buttons = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -108,7 +85,7 @@ class ListTemplate(ListTemplateBase):
 
 
 class ListTemplateMessage(ListTemplateMessageBase):
-    def __init__(self,  recipient = None,  elements = None, ):
+    def __init__(self,  recipient = None,  top_element_style = None,  elements = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -133,7 +110,7 @@ class Message(MessageBase):
 
 
 class PostBackButton(PostBackButtonBase):
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -148,7 +125,7 @@ class PostBackButton(PostBackButtonBase):
 
 
 class QuickReply(QuickReplyBase):
-    def __init__(self,  payload = None,  content_type = None,  title = None,  image_url = None, ):
+    def __init__(self,  title = None,  payload = None,  image_url = None,  content_type = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -198,7 +175,7 @@ class ShareButton(ShareButtonBase):
 
 
 class UrlButton(UrlButtonBase):
-    def __init__(self,  fallback_url = None,  url = None,  title = None,  messenger_extensions = None,  type = None,  webview_height_ratio = None, ):
+    def __init__(self,  type = None,  url = None,  fallback_url = None,  webview_height_ratio = None,  messenger_extensions = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)

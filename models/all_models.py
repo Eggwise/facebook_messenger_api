@@ -190,8 +190,8 @@ class FactoryBase():
 
 class ActionMessageBase (FactoryBase):
 
-    SCHEMA =  {'quickreply': {'value': {'message': {'name': 'message', 'value': {'quick_replies': {'name': 'quick_replies', 'value': [], 'enum': None, 'type': 'list'}, 'text': {'name': 'text', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'type': 'object'}, 'generic_template': {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'generic', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'type': 'object'}, 'type': 'object', 'list_template': {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'list', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'type': 'object'}, 'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', 'value': None, 'enum': None, 'type': 'object'}, 'text': {'name': 'text', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions'}
-    CONFIG = {'class_name': 'ActionMessage', 'mapping': {'recipient': 'recipient.id', 'action': 'sender_action'}, 'schema': 'message'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'list_template': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'list', 'type': 'string'}, 'top_element_style': {'name': 'top_element_style', 'enum': None, 'value': 'compact', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}, 'generic_template': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'generic', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}, 'type': 'object', 'quickreply': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'enum': None, 'value': [], 'type': 'list'}, 'text': {'name': 'text', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}}, 'type': 'object'}, 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'enum': None, 'value': None, 'type': 'object'}, 'text': {'name': 'text', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}}}
+    CONFIG = {'schema': 'message', 'class_name': 'ActionMessage', 'mapping': {'recipient': 'recipient.id', 'action': 'sender_action'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions'
     def __init__(self,  recipient = None,  action = None, ):
 
@@ -223,10 +223,10 @@ class ActionMessageBase (FactoryBase):
         MARK_SEEN = 'mark_seen'
 class GenericElementBase (FactoryBase):
 
-    SCHEMA =  {'value': {'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'image_url': {'name': 'image_url', 'value': None, 'enum': None, 'type': 'string'}, 'subtitle': {'name': 'subtitle', 'value': None, 'enum': None, 'type': 'string'}, 'item_url': {'name': 'item_url', 'value': None, 'enum': None, 'type': 'string'}, 'default_action': {'name': 'default_action', 'value': None, 'enum': None, 'type': 'string'}, 'buttons': {'name': 'buttons', 'value': [], 'enum': None, 'type': 'list'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'type': 'object'}
-    CONFIG = {'class_name': 'GenericElement', 'mapping': {'title': 'title', 'image_url': 'image_url', 'subtitle': 'subtitle', 'item_url': 'item_url', 'default_action': 'default_action', 'buttons': 'buttons'}, 'schema': 'generic.element'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'buttons': {'name': 'buttons', 'enum': None, 'value': [], 'type': 'list'}, 'item_url': {'name': 'item_url', 'enum': None, 'value': None, 'type': 'string'}, 'image_url': {'name': 'image_url', 'enum': None, 'value': None, 'type': 'string'}, 'default_action': {'name': 'default_action', 'enum': None, 'value': None, 'type': 'string'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}, 'subtitle': {'name': 'subtitle', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}
+    CONFIG = {'schema': 'generic.element', 'class_name': 'GenericElement', 'mapping': {'buttons': 'buttons', 'item_url': 'item_url', 'image_url': 'image_url', 'default_action': 'default_action', 'title': 'title', 'subtitle': 'subtitle'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template'
-    def __init__(self,  title = None,  image_url = None,  subtitle = None,  item_url = None,  default_action = None,  buttons = None, ):
+    def __init__(self,  buttons = None,  item_url = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
@@ -234,28 +234,12 @@ class GenericElementBase (FactoryBase):
 
     
     @property
-    def title(self):
-        return self.__getattr__('title')
+    def buttons(self):
+        return self.__getattr__('buttons')
 
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
-    
-    @property
-    def image_url(self):
-        return self.__getattr__('image_url')
-
-    @image_url.setter
-    def image_url(self, value):
-        self.__setattr__('image_url', value)
-    
-    @property
-    def subtitle(self):
-        return self.__getattr__('subtitle')
-
-    @subtitle.setter
-    def subtitle(self, value):
-        self.__setattr__('subtitle', value)
+    @buttons.setter
+    def buttons(self, value):
+        self.__setattr__('buttons', value)
     
     @property
     def item_url(self):
@@ -266,6 +250,14 @@ class GenericElementBase (FactoryBase):
         self.__setattr__('item_url', value)
     
     @property
+    def image_url(self):
+        return self.__getattr__('image_url')
+
+    @image_url.setter
+    def image_url(self, value):
+        self.__setattr__('image_url', value)
+    
+    @property
     def default_action(self):
         return self.__getattr__('default_action')
 
@@ -274,47 +266,26 @@ class GenericElementBase (FactoryBase):
         self.__setattr__('default_action', value)
     
     @property
-    def buttons(self):
-        return self.__getattr__('buttons')
+    def title(self):
+        return self.__getattr__('title')
 
-    @buttons.setter
-    def buttons(self, value):
-        self.__setattr__('buttons', value)
-    
-
-class GenericTemplateBase (FactoryBase):
-
-    SCHEMA =  {'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'generic', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'type': 'object'}
-    CONFIG = {'class_name': 'GenericTemplate', 'mapping': {'payload': 'payload', 'type': 'type'}, 'schema': 'generic.template'}
-    DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template'
-    def __init__(self,  payload = None,  type = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
     
     @property
-    def payload(self):
-        return self.__getattr__('payload')
+    def subtitle(self):
+        return self.__getattr__('subtitle')
 
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
-    
-    @property
-    def type(self):
-        return self.__getattr__('type')
-
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
+    @subtitle.setter
+    def subtitle(self, value):
+        self.__setattr__('subtitle', value)
     
 
 class GenericTemplateMessageBase (FactoryBase):
 
-    SCHEMA =  {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'generic', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'type': 'object'}
-    CONFIG = {'class_name': 'GenericTemplateMessage', 'mapping': {'recipient': 'recipient.id', 'elements': 'message.attachment.payload.elements'}, 'schema': 'generic_template.message'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'generic', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}
+    CONFIG = {'schema': 'generic_template.message', 'class_name': 'GenericTemplateMessage', 'mapping': {'recipient': 'recipient.id', 'elements': 'message.attachment.payload.elements'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template'
     def __init__(self,  recipient = None,  elements = None, ):
 
@@ -342,15 +313,31 @@ class GenericTemplateMessageBase (FactoryBase):
 
 class ListElementBase (FactoryBase):
 
-    SCHEMA =  {'value': {'default_action': {'name': 'default_action', 'value': None, 'enum': None, 'type': 'string'}, 'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'image_url': {'name': 'image_url', 'value': None, 'enum': None, 'type': 'string'}, 'subtitle': {'name': 'subtitle', 'value': None, 'enum': None, 'type': 'string'}, 'buttons': {'name': 'buttons', 'value': [], 'enum': None, 'type': 'list'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'type': 'object'}
-    CONFIG = {'class_name': 'ListElement', 'mapping': {'default_action': 'default_action', 'title': 'title', 'image_url': 'image_url', 'subtitle': 'subtitle', 'buttons': 'buttons'}, 'schema': 'list.element'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'buttons': {'name': 'buttons', 'enum': None, 'value': [], 'type': 'list'}, 'subtitle': {'name': 'subtitle', 'enum': None, 'value': None, 'type': 'string'}, 'default_action': {'name': 'default_action', 'enum': None, 'value': None, 'type': 'string'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}, 'image_url': {'name': 'image_url', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}
+    CONFIG = {'schema': 'list.element', 'class_name': 'ListElement', 'mapping': {'buttons': 'buttons', 'image_url': 'image_url', 'default_action': 'default_action', 'title': 'title', 'subtitle': 'subtitle'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template'
-    def __init__(self,  default_action = None,  title = None,  image_url = None,  subtitle = None,  buttons = None, ):
+    def __init__(self,  buttons = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
+    
+    @property
+    def buttons(self):
+        return self.__getattr__('buttons')
+
+    @buttons.setter
+    def buttons(self, value):
+        self.__setattr__('buttons', value)
+    
+    @property
+    def image_url(self):
+        return self.__getattr__('image_url')
+
+    @image_url.setter
+    def image_url(self, value):
+        self.__setattr__('image_url', value)
     
     @property
     def default_action(self):
@@ -369,14 +356,6 @@ class ListElementBase (FactoryBase):
         self.__setattr__('title', value)
     
     @property
-    def image_url(self):
-        return self.__getattr__('image_url')
-
-    @image_url.setter
-    def image_url(self, value):
-        self.__setattr__('image_url', value)
-    
-    @property
     def subtitle(self):
         return self.__getattr__('subtitle')
 
@@ -384,50 +363,13 @@ class ListElementBase (FactoryBase):
     def subtitle(self, value):
         self.__setattr__('subtitle', value)
     
-    @property
-    def buttons(self):
-        return self.__getattr__('buttons')
-
-    @buttons.setter
-    def buttons(self, value):
-        self.__setattr__('buttons', value)
-    
-
-class ListTemplateBase (FactoryBase):
-
-    SCHEMA =  {'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'list', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'type': 'object'}
-    CONFIG = {'class_name': 'ListTemplate', 'mapping': {'payload': 'payload', 'type': 'type'}, 'schema': 'list.template'}
-    DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template'
-    def __init__(self,  payload = None,  type = None, ):
-
-        _schema = copy.deepcopy(self.SCHEMA)
-        _config = copy.deepcopy(self.CONFIG)
-        super().__init__(_schema, _config, locals())
-
-    
-    @property
-    def payload(self):
-        return self.__getattr__('payload')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
-    
-    @property
-    def type(self):
-        return self.__getattr__('type')
-
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
-    
 
 class ListTemplateMessageBase (FactoryBase):
 
-    SCHEMA =  {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'list', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'type': 'object'}
-    CONFIG = {'class_name': 'ListTemplateMessage', 'mapping': {'recipient': 'recipient.id', 'elements': 'message.attachment.payload.elements'}, 'schema': 'list_template.message'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'list', 'type': 'string'}, 'top_element_style': {'name': 'top_element_style', 'enum': None, 'value': 'compact', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}
+    CONFIG = {'schema': 'list_template.message', 'class_name': 'ListTemplateMessage', 'mapping': {'recipient': 'recipient.id', 'top_element_style': 'message.attachment.payload.top_element_style', 'elements': 'message.attachment.payload.elements'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template'
-    def __init__(self,  recipient = None,  elements = None, ):
+    def __init__(self,  recipient = None,  top_element_style = None,  elements = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
@@ -443,6 +385,14 @@ class ListTemplateMessageBase (FactoryBase):
         self.__setattr__('recipient', value)
     
     @property
+    def top_element_style(self):
+        return self.__getattr__('top_element_style')
+
+    @top_element_style.setter
+    def top_element_style(self, value):
+        self.__setattr__('top_element_style', value)
+    
+    @property
     def elements(self):
         return self.__getattr__('elements')
 
@@ -453,8 +403,8 @@ class ListTemplateMessageBase (FactoryBase):
 
 class MessageBase (FactoryBase):
 
-    SCHEMA =  {'quickreply': {'value': {'message': {'name': 'message', 'value': {'quick_replies': {'name': 'quick_replies', 'value': [], 'enum': None, 'type': 'list'}, 'text': {'name': 'text', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'type': 'object'}, 'generic_template': {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'generic', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'type': 'object'}, 'type': 'object', 'list_template': {'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'payload': {'name': 'payload', 'value': {'elements': {'name': 'elements', 'value': [], 'enum': None, 'type': 'list'}, 'template_type': {'name': 'template_type', 'value': 'list', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'type': {'name': 'type', 'value': 'template', 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'type': 'object'}, 'value': {'message': {'name': 'message', 'value': {'attachment': {'name': 'attachment', 'value': None, 'enum': None, 'type': 'object'}, 'text': {'name': 'text', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions'}
-    CONFIG = {'class_name': 'Message', 'mapping': {'recipient': 'recipient.id', 'text': 'message.text', 'action': 'sender_action'}, 'schema': 'message'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'list_template': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/list-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'list', 'type': 'string'}, 'top_element_style': {'name': 'top_element_style', 'enum': None, 'value': 'compact', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}, 'generic_template': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/generic-template', 'enum': None, 'value': {'type': {'name': 'type', 'enum': None, 'value': 'template', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': {'template_type': {'name': 'template_type', 'enum': None, 'value': 'generic', 'type': 'string'}, 'elements': {'name': 'elements', 'enum': None, 'value': [], 'type': 'list'}}, 'type': 'object'}}, 'name': 'attachment', 'type': 'object'}}, 'type': 'object'}}, 'type': 'object'}, 'type': 'object', 'quickreply': {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'enum': None, 'value': [], 'type': 'list'}, 'text': {'name': 'text', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}}, 'type': 'object'}, 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'attachment': {'name': 'attachment', 'enum': None, 'value': None, 'type': 'object'}, 'text': {'name': 'text', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}}}
+    CONFIG = {'schema': 'message', 'class_name': 'Message', 'mapping': {'recipient': 'recipient.id', 'text': 'message.text', 'action': 'sender_action'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions'
     def __init__(self,  recipient = None,  text = None,  action = None, ):
 
@@ -494,31 +444,15 @@ class MessageBase (FactoryBase):
         MARK_SEEN = 'mark_seen'
 class QuickReplyBase (FactoryBase):
 
-    SCHEMA =  {'value': {'payload': {'name': 'payload', 'value': None, 'enum': None, 'type': 'string'}, 'content_type': {'name': 'content_type', 'value': None, 'enum': ['text', 'location'], 'type': 'enum'}, 'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'image_url': {'name': 'image_url', 'value': None, 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/quick-replies', 'type': 'object', 'location': {'value': {'content_type': {'name': 'content_type', 'value': 'location', 'enum': None, 'type': 'string'}}, 'type': 'object'}}
-    CONFIG = {'class_name': 'QuickReply', 'mapping': {'payload': 'payload', 'content_type': 'content_type', 'title': 'title', 'image_url': 'image_url'}, 'schema': 'quickreply'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/quick-replies', 'value': {'image_url': {'name': 'image_url', 'enum': None, 'value': None, 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': None, 'type': 'string'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}, 'content_type': {'name': 'content_type', 'enum': ['text', 'location'], 'value': None, 'type': 'enum'}}, 'location': {'type': 'object', 'value': {'content_type': {'name': 'content_type', 'enum': None, 'value': 'location', 'type': 'string'}}}, 'type': 'object'}
+    CONFIG = {'schema': 'quickreply', 'class_name': 'QuickReply', 'mapping': {'title': 'title', 'payload': 'payload', 'image_url': 'image_url', 'content_type': 'content_type'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/quick-replies'
-    def __init__(self,  payload = None,  content_type = None,  title = None,  image_url = None, ):
+    def __init__(self,  title = None,  payload = None,  image_url = None,  content_type = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def payload(self):
-        return self.__getattr__('payload')
-
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
-    
-    @property
-    def content_type(self):
-        return self.__getattr__('content_type')
-
-    @content_type.setter
-    def content_type(self, value):
-        self.__setattr__('content_type', value)
     
     @property
     def title(self):
@@ -529,6 +463,14 @@ class QuickReplyBase (FactoryBase):
         self.__setattr__('title', value)
     
     @property
+    def payload(self):
+        return self.__getattr__('payload')
+
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
+    
+    @property
     def image_url(self):
         return self.__getattr__('image_url')
 
@@ -536,14 +478,22 @@ class QuickReplyBase (FactoryBase):
     def image_url(self, value):
         self.__setattr__('image_url', value)
     
+    @property
+    def content_type(self):
+        return self.__getattr__('content_type')
+
+    @content_type.setter
+    def content_type(self, value):
+        self.__setattr__('content_type', value)
+    
 
     class CONTENT_TYPE:
         TEXT = 'text'
         LOCATION = 'location'
 class QuickReplyMessageBase (FactoryBase):
 
-    SCHEMA =  {'value': {'message': {'name': 'message', 'value': {'quick_replies': {'name': 'quick_replies', 'value': [], 'enum': None, 'type': 'list'}, 'text': {'name': 'text', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'recipient': {'name': 'recipient', 'value': {'id': {'name': 'id', 'value': None, 'enum': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'value': None, 'enum': None, 'type': 'string'}}, 'enum': None, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'value': None, 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'type': 'enum'}, 'sender_action': {'name': 'sender_action', 'value': None, 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'type': 'enum'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'type': 'object'}
-    CONFIG = {'class_name': 'QuickReplyMessage', 'mapping': {'recipient': 'recipient.id', 'text': 'message.text', 'quick_replies': 'message.quick_replies'}, 'schema': 'quickreply.message'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions', 'value': {'sender_action': {'name': 'sender_action', 'enum': ['typing_on', 'typing_off', 'mark_seen'], 'value': None, 'type': 'enum'}, 'recipient': {'name': 'recipient', 'enum': None, 'value': {'id': {'name': 'id', 'enum': None, 'value': None, 'type': 'string'}, 'phone_number': {'name': 'phone_number', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}, 'notification_type': {'name': 'notification_type', 'enum': ['REGULAR', 'SILENT_PUSH', 'NO_PUSH'], 'value': None, 'type': 'enum'}, 'message': {'name': 'message', 'enum': None, 'value': {'quick_replies': {'name': 'quick_replies', 'enum': None, 'value': [], 'type': 'list'}, 'text': {'name': 'text', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}}, 'type': 'object'}
+    CONFIG = {'schema': 'quickreply.message', 'class_name': 'QuickReplyMessage', 'mapping': {'recipient': 'recipient.id', 'text': 'message.text', 'quick_replies': 'message.quick_replies'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions'
     def __init__(self,  recipient = None,  text = None,  quick_replies = None, ):
 
@@ -579,10 +529,10 @@ class QuickReplyMessageBase (FactoryBase):
 
 class CallButtonBase (FactoryBase):
 
-    SCHEMA =  {'value': {'payload': {'name': 'payload', 'value': None, 'enum': None, 'type': 'string'}, 'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'type': {'name': 'type', 'value': 'phone_number', 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button', 'type': 'object'}
-    CONFIG = {'class_name': 'CallButton', 'mapping': {'payload': 'payload', 'title': 'title', 'type': 'type'}, 'schema': 'call.button'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button', 'value': {'type': {'name': 'type', 'enum': None, 'value': 'phone_number', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': None, 'type': 'string'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}
+    CONFIG = {'schema': 'call.button', 'class_name': 'CallButton', 'mapping': {'type': 'type', 'title': 'title', 'payload': 'payload'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button'
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
@@ -590,12 +540,12 @@ class CallButtonBase (FactoryBase):
 
     
     @property
-    def payload(self):
-        return self.__getattr__('payload')
+    def type(self):
+        return self.__getattr__('type')
 
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
+    @type.setter
+    def type(self, value):
+        self.__setattr__('type', value)
     
     @property
     def title(self):
@@ -606,20 +556,20 @@ class CallButtonBase (FactoryBase):
         self.__setattr__('title', value)
     
     @property
-    def type(self):
-        return self.__getattr__('type')
+    def payload(self):
+        return self.__getattr__('payload')
 
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
     
 
 class PostBackButtonBase (FactoryBase):
 
-    SCHEMA =  {'value': {'payload': {'name': 'payload', 'value': None, 'enum': None, 'type': 'string'}, 'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'type': {'name': 'type', 'value': 'postback', 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button', 'type': 'object'}
-    CONFIG = {'class_name': 'PostBackButton', 'mapping': {'payload': 'payload', 'title': 'title', 'type': 'type'}, 'schema': 'postback.button'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button', 'value': {'type': {'name': 'type', 'enum': None, 'value': 'postback', 'type': 'string'}, 'payload': {'name': 'payload', 'enum': None, 'value': None, 'type': 'string'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}}, 'type': 'object'}
+    CONFIG = {'schema': 'postback.button', 'class_name': 'PostBackButton', 'mapping': {'type': 'type', 'title': 'title', 'payload': 'payload'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button'
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
@@ -627,12 +577,12 @@ class PostBackButtonBase (FactoryBase):
 
     
     @property
-    def payload(self):
-        return self.__getattr__('payload')
+    def type(self):
+        return self.__getattr__('type')
 
-    @payload.setter
-    def payload(self, value):
-        self.__setattr__('payload', value)
+    @type.setter
+    def type(self, value):
+        self.__setattr__('type', value)
     
     @property
     def title(self):
@@ -643,18 +593,18 @@ class PostBackButtonBase (FactoryBase):
         self.__setattr__('title', value)
     
     @property
-    def type(self):
-        return self.__getattr__('type')
+    def payload(self):
+        return self.__getattr__('payload')
 
-    @type.setter
-    def type(self, value):
-        self.__setattr__('type', value)
+    @payload.setter
+    def payload(self, value):
+        self.__setattr__('payload', value)
     
 
 class ShareButtonBase (FactoryBase):
 
-    SCHEMA =  {'value': {'type': {'name': 'type', 'value': 'element_share', 'enum': None, 'type': 'string'}}, '_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button', 'type': 'object'}
-    CONFIG = {'class_name': 'ShareButton', 'mapping': {'type': 'type'}, 'schema': 'share.button'}
+    SCHEMA =  {'_doc': 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button', 'value': {'type': {'name': 'type', 'enum': None, 'value': 'element_share', 'type': 'string'}}, 'type': 'object'}
+    CONFIG = {'schema': 'share.button', 'class_name': 'ShareButton', 'mapping': {'type': 'type'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button'
     def __init__(self,  type = None, ):
 
@@ -674,47 +624,15 @@ class ShareButtonBase (FactoryBase):
 
 class UrlButtonBase (FactoryBase):
 
-    SCHEMA =  {'value': {'fallback_url': {'name': 'fallback_url', 'value': None, 'enum': None, 'type': 'string'}, 'url': {'name': 'url', 'value': None, 'enum': None, 'type': 'string'}, 'title': {'name': 'title', 'value': None, 'enum': None, 'type': 'string'}, 'messenger_extensions': {'name': 'messenger_extensions', 'value': None, 'enum': None, 'type': 'boolean'}, 'type': {'name': 'type', 'value': 'web_url', 'enum': None, 'type': 'string'}, 'webview_height_ratio': {'name': 'webview_height_ratio', 'value': None, 'enum': ['compact', 'tall', 'full'], 'type': 'enum'}}, 'type': 'object'}
-    CONFIG = {'class_name': 'UrlButton', 'mapping': {'fallback_url': 'fallback_url', 'url': 'url', 'title': 'title', 'messenger_extensions': 'messenger_extensions', 'type': 'type', 'webview_height_ratio': 'webview_height_ratio'}, 'schema': 'url.button'}
+    SCHEMA =  {'type': 'object', 'value': {'type': {'name': 'type', 'enum': None, 'value': 'web_url', 'type': 'string'}, 'url': {'name': 'url', 'enum': None, 'value': None, 'type': 'string'}, 'fallback_url': {'name': 'fallback_url', 'enum': None, 'value': None, 'type': 'string'}, 'webview_height_ratio': {'name': 'webview_height_ratio', 'enum': ['compact', 'tall', 'full'], 'value': None, 'type': 'enum'}, 'messenger_extensions': {'name': 'messenger_extensions', 'enum': None, 'value': None, 'type': 'boolean'}, 'title': {'name': 'title', 'enum': None, 'value': None, 'type': 'string'}}}
+    CONFIG = {'schema': 'url.button', 'class_name': 'UrlButton', 'mapping': {'type': 'type', 'url': 'url', 'fallback_url': 'fallback_url', 'webview_height_ratio': 'webview_height_ratio', 'messenger_extensions': 'messenger_extensions', 'title': 'title'}}
     DOC_URL = 'https://developers.facebook.com/docs/messenger-platform'
-    def __init__(self,  fallback_url = None,  url = None,  title = None,  messenger_extensions = None,  type = None,  webview_height_ratio = None, ):
+    def __init__(self,  type = None,  url = None,  fallback_url = None,  webview_height_ratio = None,  messenger_extensions = None,  title = None, ):
 
         _schema = copy.deepcopy(self.SCHEMA)
         _config = copy.deepcopy(self.CONFIG)
         super().__init__(_schema, _config, locals())
 
-    
-    @property
-    def fallback_url(self):
-        return self.__getattr__('fallback_url')
-
-    @fallback_url.setter
-    def fallback_url(self, value):
-        self.__setattr__('fallback_url', value)
-    
-    @property
-    def url(self):
-        return self.__getattr__('url')
-
-    @url.setter
-    def url(self, value):
-        self.__setattr__('url', value)
-    
-    @property
-    def title(self):
-        return self.__getattr__('title')
-
-    @title.setter
-    def title(self, value):
-        self.__setattr__('title', value)
-    
-    @property
-    def messenger_extensions(self):
-        return self.__getattr__('messenger_extensions')
-
-    @messenger_extensions.setter
-    def messenger_extensions(self, value):
-        self.__setattr__('messenger_extensions', value)
     
     @property
     def type(self):
@@ -725,12 +643,44 @@ class UrlButtonBase (FactoryBase):
         self.__setattr__('type', value)
     
     @property
+    def url(self):
+        return self.__getattr__('url')
+
+    @url.setter
+    def url(self, value):
+        self.__setattr__('url', value)
+    
+    @property
+    def fallback_url(self):
+        return self.__getattr__('fallback_url')
+
+    @fallback_url.setter
+    def fallback_url(self, value):
+        self.__setattr__('fallback_url', value)
+    
+    @property
     def webview_height_ratio(self):
         return self.__getattr__('webview_height_ratio')
 
     @webview_height_ratio.setter
     def webview_height_ratio(self, value):
         self.__setattr__('webview_height_ratio', value)
+    
+    @property
+    def messenger_extensions(self):
+        return self.__getattr__('messenger_extensions')
+
+    @messenger_extensions.setter
+    def messenger_extensions(self, value):
+        self.__setattr__('messenger_extensions', value)
+    
+    @property
+    def title(self):
+        return self.__getattr__('title')
+
+    @title.setter
+    def title(self, value):
+        self.__setattr__('title', value)
     
 
     class WEBVIEW_HEIGHT_RATIO:
@@ -779,7 +729,7 @@ class ActionMessage(ActionMessageBase):
 
 
 class CallButton(CallButtonBase):
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -791,7 +741,7 @@ class CallButton(CallButtonBase):
 
 
 class GenericElement(GenericElementBase):
-    def __init__(self,  title = None,  image_url = None,  subtitle = None,  item_url = None,  default_action = None,  buttons = None, ):
+    def __init__(self,  buttons = None,  item_url = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -801,17 +751,6 @@ class GenericElement(GenericElementBase):
         # TODO
         pass
 
-
-class GenericTemplate(GenericTemplateBase):
-    def __init__(self,  payload = None,  type = None, ):
-        super_args = Utils._get_super_args(locals())
-
-        super().__init__(**super_args)
-        self.validate()
-
-    def validate(self):
-        # TODO
-        pass
 
 
 class GenericTemplateMessage(GenericTemplateMessageBase):
@@ -827,7 +766,7 @@ class GenericTemplateMessage(GenericTemplateMessageBase):
 
 
 class ListElement(ListElementBase):
-    def __init__(self,  default_action = None,  title = None,  image_url = None,  subtitle = None,  buttons = None, ):
+    def __init__(self,  buttons = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -837,21 +776,10 @@ class ListElement(ListElementBase):
         # TODO
         pass
 
-
-class ListTemplate(ListTemplateBase):
-    def __init__(self,  payload = None,  type = None, ):
-        super_args = Utils._get_super_args(locals())
-
-        super().__init__(**super_args)
-        self.validate()
-
-    def validate(self):
-        # TODO
-        pass
 
 
 class ListTemplateMessage(ListTemplateMessageBase):
-    def __init__(self,  recipient = None,  elements = None, ):
+    def __init__(self,  recipient = None,  top_element_style = None,  elements = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -876,7 +804,7 @@ class Message(MessageBase):
 
 
 class PostBackButton(PostBackButtonBase):
-    def __init__(self,  payload = None,  title = None,  type = None, ):
+    def __init__(self,  type = None,  title = None,  payload = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -891,7 +819,7 @@ class PostBackButton(PostBackButtonBase):
 
 
 class QuickReply(QuickReplyBase):
-    def __init__(self,  payload = None,  content_type = None,  title = None,  image_url = None, ):
+    def __init__(self,  title = None,  payload = None,  image_url = None,  content_type = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -941,7 +869,7 @@ class ShareButton(ShareButtonBase):
 
 
 class UrlButton(UrlButtonBase):
-    def __init__(self,  fallback_url = None,  url = None,  title = None,  messenger_extensions = None,  type = None,  webview_height_ratio = None, ):
+    def __init__(self,  type = None,  url = None,  fallback_url = None,  webview_height_ratio = None,  messenger_extensions = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
