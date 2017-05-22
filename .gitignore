@@ -92,3 +92,5 @@ ENV/
 
 test/config.yml
 test/config.json
+
+*.destination
