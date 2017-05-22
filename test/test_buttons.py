@@ -51,7 +51,7 @@ def test_button_postback():
 
 def test_button_url():
     some_url = 'https://google.com'
-    button_url = UrlButton(url=some_url, title='Url button')
+    button_url = UrlButton(url=some_url, title='Url button', webview_height_ratio=UrlButton.WEBVIEW_HEIGHT_RATIO.COMPACT)
     send_buttons(button_url)
     pass
 
@@ -80,11 +80,11 @@ def test_some_buttons():
     send_buttons(buttons)
 
 
-# test_button_url()
+test_button_url()
 # test_button_share()
 # test_button_call()
 # test_button_postback()
 
 # test_buttons()
 
-test_some_buttons()
+# test_some_buttons()
