@@ -36,7 +36,7 @@ class ActionMessage(ActionMessageBase):
 
 
 class CallButton(CallButtonBase):
-    def __init__(self,  type = None,  title = None,  payload = None, ):
+    def __init__(self,  type = None,  payload = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -48,7 +48,7 @@ class CallButton(CallButtonBase):
 
 
 class GenericElement(GenericElementBase):
-    def __init__(self,  buttons = None,  item_url = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
+    def __init__(self,  subtitle = None,  title = None,  buttons = None,  default_action = None,  image_url = None,  item_url = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -61,7 +61,7 @@ class GenericElement(GenericElementBase):
 
 
 class GenericTemplateMessage(GenericTemplateMessageBase):
-    def __init__(self,  recipient = None,  elements = None, ):
+    def __init__(self,  elements = None,  recipient = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -73,31 +73,53 @@ class GenericTemplateMessage(GenericTemplateMessageBase):
 
 
 class ListElement(ListElementBase):
-    def __init__(self,  buttons = None,  image_url = None,  default_action = None,  title = None,  subtitle = None, ):
+    def __init__(self,  image_url = None,  subtitle = None,  title = None,  buttons = None,  default_action = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
         self.validate()
 
     def validate(self):
+        if len(self.buttons) > 1:
+            self.raise_validation_error('Too many buttons for list element, max is 1')
+
         # TODO
         pass
 
 
 class ListTemplateMessage(ListTemplateMessageBase):
-    def __init__(self,  recipient = None,  top_element_style = None,  elements = None, ):
+    def __init__(self,  elements = None,  buttons = None,  recipient = None,  top_element_style = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
         self.validate()
 
+
     def validate(self):
-        # TODO
-        pass
+        if len(self.elements) < 2:
+            self.raise_validation_error('Too few elements, min 2, max 4')
+        if len(self.elements) > 4:
+            self.raise_validation_error('Too many elements, max 4, min 2')
+        if len(self.buttons) > 1:
+            self.raise_validation_error('Too many many global buttons, max 1')
+
+#TODO figure out how to add properties
+    # @property
+    # def global_button(self):
+    #     if len(self.buttons) == 0:
+    #         return None
+    #     return self.buttons[0]
+    #
+    # @global_button.setter
+    # def global_button(self, value):
+    #     print('set global button')
+    #     if self.buttons is None:
+    #         self.buttons = []
+    #     self.buttons[1] = value
 
 
 class Message(MessageBase):
-    def __init__(self,  recipient = None,  text = None,  action = None, ):
+    def __init__(self,  recipient = None,  action = None,  text = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -110,7 +132,7 @@ class Message(MessageBase):
 
 
 class PostBackButton(PostBackButtonBase):
-    def __init__(self,  type = None,  title = None,  payload = None, ):
+    def __init__(self,  type = None,  payload = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -125,7 +147,7 @@ class PostBackButton(PostBackButtonBase):
 
 
 class QuickReply(QuickReplyBase):
-    def __init__(self,  title = None,  payload = None,  image_url = None,  content_type = None, ):
+    def __init__(self,  image_url = None,  payload = None,  content_type = None,  title = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
@@ -175,7 +197,7 @@ class ShareButton(ShareButtonBase):
 
 
 class UrlButton(UrlButtonBase):
-    def __init__(self,  type = None,  url = None,  fallback_url = None,  webview_height_ratio = None,  messenger_extensions = None,  title = None, ):
+    def __init__(self,  title = None,  type = None,  webview_height_ratio = None,  url = None,  fallback_url = None,  messenger_extensions = None, ):
         super_args = Utils._get_super_args(locals())
 
         super().__init__(**super_args)
